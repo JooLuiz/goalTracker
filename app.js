@@ -24,7 +24,7 @@ app.get('/goals', function(req, res){
 });
 
 app.post('/goals', function(req, res){
-	db.goals.insert(req.body, function(){
+	db.goals.insert(req.body, function(err, docs){
 		if(err){
 			res.send(err);
 		}else{
