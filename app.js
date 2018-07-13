@@ -24,12 +24,31 @@ app.get('/goals', function(req, res){
 });
 
 app.post('/goals', function(req, res){
-	db.goals.insert(req.body, function(err, docs){
+	db.goals.insert(req.body, function(err, doc){
 		if(err){
 			res.send(err);
 		}else{
 			console.log('Adding goals...');
-			res.json(docs);
+			res.json(doc);
+		}
+	});
+});
+
+app.put('/goals/:id', function(req, res){
+	db.goals.findAndModify({query:{_id: mongojs.ObjectId(req.params.id)},
+		update:{ $set:{
+				name: req.body.name,
+				type: req.body.type,
+				deadline: req.body.deadline
+			}
+		},
+		new: true},
+		function(err, doc){
+		if(err){
+			res.send(err);
+		}else{
+			console.log('Updating goals...');
+			res.json(doc);
 		}
 	});
 });
