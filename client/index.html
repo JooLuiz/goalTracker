@@ -56,8 +56,10 @@
     		</div>
     		
     		<div class="col-md-3">
-    			<button data-bind="click: addGoal, enable: goalNameInput"class="btn btn-primary">Add Goal</button>
-    			<button data-bind="click: deleteGoal, enable: canEdit" class="btn btn-danger">Delete</button>
+    			<button data-bind="click: addGoal, enable: goalNameInput, visible: !isUpdate()"class="btn btn-primary">Add Goal</button>
+    			<button data-bind="click: updateGoal,visible: isUpdate , enable: goalNameInput"class="btn btn-primary">Update</button>
+    			<button data-bind="click: editGoal, enable: canEdit" class="btn btn-info">Edit Goal</button>
+    			<button data-bind="click: deleteGoal, enable: canDelete" class="btn btn-danger">Delete</button>
     		</div>
     	</div>
 
