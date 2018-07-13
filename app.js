@@ -28,14 +28,15 @@ app.post('/goals', function(req, res){
 		if(err){
 			res.send(err);
 		}else{
-			console.log('Adding goals...');
+			console.log('Adding goal...');
 			res.json(doc);
 		}
 	});
 });
 
 app.put('/goals/:id', function(req, res){
-	db.goals.findAndModify({query:{_id: mongojs.ObjectId(req.params.id)},
+	db.goals.findAndModify({query:
+		{_id: mongojs.ObjectId(req.params.id)},
 		update:{ $set:{
 				name: req.body.name,
 				type: req.body.type,
@@ -47,7 +48,18 @@ app.put('/goals/:id', function(req, res){
 		if(err){
 			res.send(err);
 		}else{
-			console.log('Updating goals...');
+			console.log('Updating goal...');
+			res.json(doc);
+		}
+	});
+});
+
+app.delete('/goals/:id', function(req, res){
+	db.goals.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, doc){
+		if(err){
+			res.send(err);
+		}else{
+			console.log('Removing goal...');
 			res.json(doc);
 		}
 	});
